@@ -105,6 +105,13 @@ p{
   color: white;
 }
 
+.fa-patreon
+{
+	 background: #E85641;
+  color: white;
+}
+
+
 .myclick:hover
 {
    opacity: 0.7;
