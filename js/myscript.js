@@ -123,28 +123,38 @@ var testimg = "https://c10.patreonusercontent.com/3/eyJoIjo1MTgsInciOjkyMH0%3D/p
 var reqUrl = "http://www.patreon.com/api/posts?fields[post]=image%2Cpost_file%2Cpublished_at%2Cpatron_count%2Cpatreon_url%2Cpost_type%2Cpledge_url%2Cthumbnail_url%2Cteaser_text%2Ctitle%2Curl&fields[user]=image_url%2Cfull_name%2Curl&fields[campaign]=avatar_photo_url%2Cearnings_visibility%2Cis_nsfw%2Cis_monthly%2Cname%2Curl&fields[access_rule]=access_rule_type%2Camount_cents&sort=-published_at&filter[campaign_id]=1283507&filter[is_draft]=false&filter[tag]=Oirbo&filter[contains_exclusive_posts]=true&json-api-use-default-includes=false&json-api-version=1.0"
 
 $(document).ready(function() {
+/*	
   $.ajaxPrefilter( function (options) {
+	  return;
   if (options.crossDomain && jQuery.support.cors) {
     var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
     options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
     //options.url = "http://cors.corsproxy.io/url=" + options.url;
   }
 });
+*/
 
-$.get(
-    reqUrl,
-    function (response) 
+var url = 'https://api.allorigins.win/get?url='+encodeURIComponent(reqUrl);
+
+$.get({
+    url: url,
+    success: function (response) 
 	{
 		AddNewsFromPatreon(response.data[0]);
 		AddNewsFromPatreon(response.data[1]);
 		AddNewsFromPatreon(response.data[2]);
 		
 		
-	var elems = $("#newsContainer").on('click', ".card", function(data,__){
-		var url = data.currentTarget.id;
-		window.open( url);
-	});
-	
-	});
+		var elems = $("#newsContainer").on('click', ".card", function(data,__){
+			var url = data.currentTarget.id;
+			window.open( url);
+		});	
+	},
+	beforeSend: function(xhr)
+	{
+		xhr.setRequestHeader('X-Requested-With', 'oirbo.com');
+	},
+	}
+	);
 
 });
