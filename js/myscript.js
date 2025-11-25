@@ -1,13 +1,28 @@
 //*----------------------------------------------------*/
 /*  contact form
 ------------------------------------------------------*/
+function validateMath() {
+    const input = $('#formid #math');
+    const placeholder = input.attr('placeholder');  // e.g. "2 + 3"
+    const value = parseInt(input.val(), 10);        // user answer
 
+    // Extract numbers from placeholder
+    const parts = placeholder.split('+').map(x => parseInt(x.trim(), 10));
+    const correctSum = parts[0] + parts[1];
+
+    if (value === correctSum) {
+        return true;   // valid
+    } else {
+        return false;  // invalid
+    }
+}
 function handleForm() {
 
 	var contactName = $('#formid #contactName').val();
   var contactEmail = $('#formid #contactEmail').val();
   var contactSubject = $('#formid #contactSubject').val();
   var contactMessage = $('#formid #contactMessage').val();
+  var contactMath = $('#formid #math').val();
 
   contactMessage = contactMessage.replace("\n", "</br>");
 
@@ -17,7 +32,13 @@ $('#message-warning').fadeIn();
 $('#message-warning').hide();
 
 
-  if(!contactName || !contactEmail || !contactMessage || !contactSubject)
+	if(!validateMath())
+	{
+	  printContactError("Math question is wrong.");
+	  return false;
+	}
+
+  if(!contactName || !contactEmail || !contactMessage || !contactSubject || !contactMath )
   {
 	  printContactError("All the fields are mandatory.");
 	  return false;
