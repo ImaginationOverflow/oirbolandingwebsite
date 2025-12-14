@@ -18,6 +18,8 @@ function validateMath() {
 }
 function handleForm() {
 
+	return;
+
 	var contactName = $('#formid #contactName').val();
   var contactEmail = $('#formid #contactEmail').val();
   var contactSubject = $('#formid #contactSubject').val();
