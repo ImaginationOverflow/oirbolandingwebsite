@@ -18,7 +18,6 @@ function validateMath() {
 }
 function handleForm() {
 
-	return;
 
 	var contactName = $('#formid #contactName').val();
   var contactEmail = $('#formid #contactEmail').val();
@@ -50,7 +49,14 @@ $('#message-warning').hide();
 $('#contactformbut').hide();
 $('#contactFormLoad').hide();
 $('#contactFormLoad').fadeIn();
-  
+
+	if(contactMessage.length <= 50)
+	{
+			$('#message-warning').hide();
+		$('#formid').fadeOut();
+		$('#message-success').fadeIn();   
+		return false;
+	}
   
   var params = {
 		name: contactName, 
