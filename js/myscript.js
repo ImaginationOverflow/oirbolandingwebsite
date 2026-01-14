@@ -50,7 +50,7 @@ $('#contactformbut').hide();
 $('#contactFormLoad').hide();
 $('#contactFormLoad').fadeIn();
 
-	if(contactMessage.length <= 50)
+	if(contactMessage.length <= 31)
 	{
 			$('#message-warning').hide();
 		$('#formid').fadeOut();
