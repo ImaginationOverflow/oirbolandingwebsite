@@ -64,7 +64,7 @@ $('#contactFormLoad').fadeIn();
 		message: contactMessage,
 		subject: "[Oirbo] "+contactSubject
 	};
-  emailjs.send("gmail","template_wwaqqnk",params)
+  emailjs.send("gmail","mysuperid",params)
 	.then(function(response) 
 	{
 		$('#message-warning').hide();
